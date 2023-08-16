@@ -174,6 +174,15 @@ const useStyles = makeStyles()(theme => {
             marginTop: `-${theme.spacing(2)}`,
             marginBottom: theme.spacing(3)
         },
+        title: {
+            ...withPixelLineHeight(theme.typography.heading4),
+            color: `${theme.palette.text01}!important`,
+            marginBottom: theme.spacing(3),
+            textAlign: 'center',
+
+            '@media (max-width: 400px)': {
+                display: 'none'
+            }},
 
         dropdownContainer: {
             position: 'relative',
@@ -400,8 +409,12 @@ const Prejoin = ({
                 {showErrorOnJoin && <div
                     className = { classes.error }
                     data-testid = 'prejoin.errorMessage'>{t('prejoin.errorMissingName')}</div>}
+                <div className={classes.dropdownContainer}>
 
-                <div className = { classes.dropdownContainer }>
+                     <h1 className = { classes.title }>
+                            {'Ready to share your memory?'}
+                        </h1>
+
                     <Popover
                         content = { hasExtraJoinButtons && <div className = { classes.dropdownButtons }>
                             {extraButtonsToRender.map(({ key, ...rest }) => (
@@ -420,7 +433,7 @@ const Prejoin = ({
                         <ActionButton
                             OptionsIcon = { showJoinByPhoneButtons ? IconArrowUp : IconArrowDown }
                             ariaDropDownLabel = { t('prejoin.joinWithoutAudio') }
-                            ariaLabel = { t('prejoin.joinMeeting') }
+                            ariaLabel = { t('prejoin.joinMeeting','ll')}
                             ariaPressed = { showJoinByPhoneButtons }
                             disabled = { joiningInProgress || (showUnsafeRoomWarning && !unsafeRoomConsent) }
                             hasOptions = { hasExtraJoinButtons }
@@ -429,8 +442,9 @@ const Prejoin = ({
                             role = 'button'
                             tabIndex = { 0 }
                             testId = 'prejoin.joinMeeting'
-                            type = 'primary'>
-                            {t('prejoin.joinMeeting')}
+                            type='primary'>
+                           {`Let's Start`}
+                            {/* {t('prejoin.joinMeeting')} */}
                         </ActionButton>
                     </Popover>
                 </div>

@@ -10,6 +10,8 @@ import { getConferenceName } from '../../../conference/functions';
 import { PREMEETING_BUTTONS, THIRD_PARTY_PREJOIN_BUTTONS } from '../../../config/constants';
 import { getToolbarButtons, isToolbarButtonEnabled } from '../../../config/functions.web';
 import { withPixelLineHeight } from '../../../styles/functions.web';
+// import Watermarks from '../../../../welcome/components/WelcomePage.web'
+
 
 import ConnectionStatus from './ConnectionStatus';
 import Preview from './Preview';
@@ -137,16 +139,16 @@ const useStyles = makeStyles()(theme => {
             margin: 'auto',
             width: '100%'
         },
-        title: {
-            ...withPixelLineHeight(theme.typography.heading4),
-            color: `${theme.palette.text01}!important`,
-            marginBottom: theme.spacing(3),
-            textAlign: 'center',
+        // title: {
+        //     ...withPixelLineHeight(theme.typography.heading4),
+        //     color: `${theme.palette.text01}!important`,
+        //     marginBottom: theme.spacing(3),
+        //     textAlign: 'center',
 
-            '@media (max-width: 400px)': {
-                display: 'none'
-            }
-        },
+        //     '@media (max-width: 400px)': {
+        //         display: 'none'
+        //     }
+        // },
         roomName: {
             ...withPixelLineHeight(theme.typography.heading5),
             color: theme.palette.text01,
@@ -170,6 +172,7 @@ const PreMeetingScreen = ({
     showUnsafeRoomWarning,
     skipPrejoinButton,
     title,
+    name,
     videoMuted,
     videoTrack
 }: IProps) => {
@@ -180,23 +183,33 @@ const PreMeetingScreen = ({
         backgroundSize: 'cover'
     } : {};
 
+    const { DEFAULT_WELCOME_PAGE_LOGO_URL, DISPLAY_WELCOME_FOOTER } = interfaceConfig;
+
     return (
         <div className = { clsx('premeeting-screen', classes.container, className) }>
             <div style = { style }>
-                <div className = { classes.content }>
+                <div className={classes.content}>
+                    BOOM
                     <ConnectionStatus />
 
-                    <div className = { classes.contentControls }>
-                        <h1 className = { classes.title }>
+                    <div className={classes.contentControls}>
+                        {/*Logo*/}
+                        <img src={DEFAULT_WELCOME_PAGE_LOGO_URL} />
+                        {/* <Watermarks
+                                    defaultJitsiLogoURL = { DEFAULT_WELCOME_PAGE_LOGO_URL }
+                                    noMargins = { true } /> */}
+                        {/* Ready to share your memory text*/}
+                        {/* <h1 className = { classes.title }>
                             {title}
-                        </h1>
-                        {_roomName && (
+                        </h1> */}
+                    {/*random letters room name */}
+                        {/* {_roomName && (
                             <span className = { classes.roomName }>
                                 {_roomName}
                             </span>
-                        )}
+                        )} */}
                         {children}
-                        {_buttons.length && <Toolbox toolbarButtons = { _buttons } />}
+                        {_buttons.length && <Toolbox toolbarButtons={_buttons} />}
                         {skipPrejoinButton}
                         {showUnsafeRoomWarning && <UnsafeRoomWarning />}
                         {showDeviceStatus && <DeviceStatus />}
